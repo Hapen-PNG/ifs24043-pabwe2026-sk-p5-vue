@@ -8,8 +8,8 @@ vi.mock('../api/authApi.js')
 vi.mock('../../../helpers/toolsHelper.js', () => ({ showErrorDialog: vi.fn() }))
 
 async function fillAndSubmit() {
-  await fireEvent.update(document.querySelector('#email'), 'a@b.c')
-  await fireEvent.update(document.querySelector('#password'), 'secret')
+  await fireEvent.update(document.querySelector('#login-email-input'), 'a@b.c')
+  await fireEvent.update(document.querySelector('#login-password-input'), 'secret')
   await fireEvent.click(document.querySelector('#login-submit-button'))
 }
 
@@ -30,10 +30,12 @@ describe('LoginPage', () => {
     renderWithProviders(LoginPage)
 
     expect(document.querySelector('form').tagName).toBe('FORM')
-    expect(document.querySelector('#email')).toHaveAttribute('type', 'email')
-    expect(document.querySelector('#email')).toHaveAttribute('name', 'email')
-    expect(document.querySelector('#password')).toHaveAttribute('type', 'password')
-    expect(document.querySelector('#password')).toHaveAttribute('name', 'password')
+    expect(document.querySelector('#login-email-input')).toHaveAttribute('type', 'email')
+    expect(document.querySelector('#login-email-input')).toHaveAttribute('name', 'email')
+    expect(document.querySelector('label[for="login-email-input"]')).toBeInTheDocument()
+    expect(document.querySelector('#login-password-input')).toHaveAttribute('type', 'password')
+    expect(document.querySelector('#login-password-input')).toHaveAttribute('name', 'password')
+    expect(document.querySelector('label[for="login-password-input"]')).toBeInTheDocument()
     expect(document.querySelector('#login-submit-button')).toHaveAttribute('type', 'submit')
   })
 

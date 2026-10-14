@@ -33,13 +33,13 @@ async function submit() {
   <form class="space-y-4" @submit.prevent="submit">
     <h2 class="text-lg font-semibold">Masuk ke akun Anda</h2>
     <div>
-      <label for="email" class="block text-sm font-semibold mb-1">Email</label>
-      <input id="email" name="email" type="email" aria-label="Email" required :value="email" @input="onEmail"
+      <label for="login-email-input" class="block text-sm font-semibold mb-1">Email</label>
+      <input id="login-email-input" name="email" type="email" aria-label="Email" required :value="email" @input="onEmail"
         class="w-full rounded-lg border border-stone-500 px-3 py-2" />
     </div>
     <div>
-      <label for="password" class="block text-sm font-semibold mb-1">Kata sandi</label>
-      <input id="password" name="password" type="password" aria-label="Kata sandi" required :value="password" @input="onPassword"
+      <label for="login-password-input" class="block text-sm font-semibold mb-1">Kata sandi</label>
+      <input id="login-password-input" name="password" type="password" aria-label="Kata sandi" required :value="password" @input="onPassword"
         class="w-full rounded-lg border border-stone-500 px-3 py-2" />
     </div>
     <p v-if="errorMessage" role="alert" class="text-sm text-red-700">
