@@ -1,12 +1,12 @@
-import { normalizeResponse, requestJson } from '../../../helpers/apiHelper.js'
+import { getApiBaseUrl, normalizeResponse, requestJson } from '../../../helpers/apiHelper.js'
 
 const post = async (path, body) => {
-  const res = await fetch(`${DELCOM_BASEURL}${path}`, {
+  const response = await fetch(`${getApiBaseUrl()}${path}`, {
     method: 'POST',
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   })
-  return normalizeResponse(await res.json())
+  return normalizeResponse(await response.json())
 }
 
 export const login = ({ email, password }) => post('/auth/login', { email, password })

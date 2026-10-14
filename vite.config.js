@@ -2,21 +2,11 @@ import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 
-const apiProxy = {
-  '/api': {
-    target: 'https://open-api.delcom.org',
-    changeOrigin: true,
-  },
-}
-
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
-  define: { DELCOM_BASEURL: JSON.stringify('/api/v1') },
   server: {
     port: Number(process.env.APP_PORT || process.env.VITE_APP_PORT || 3000),
-    proxy: apiProxy,
   },
-  preview: { proxy: apiProxy },
   build: {
     sourcemap: true,
     target: 'es2020',
