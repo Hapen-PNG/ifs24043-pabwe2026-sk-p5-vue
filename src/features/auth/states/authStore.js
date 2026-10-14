@@ -12,11 +12,24 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function loginUser(payload) {
     const res = await login(payload)
-    isAuthLogin.value = Boolean(res.success)
     if (res.success) {
-      token.value = res.data.token
-      putAccessToken(res.data.token)
+      const accessToken = res.data?.token
+      if (typeof accessToken !== 'string' || !accessToken) {
+        isAuthLogin.value = false
+        return {
+          ...res,
+          success: false,
+          message: 'Respons login tidak menyertakan token akses.',
+        }
+      }
+
+      putAccessToken(accessToken)
+      token.value = accessToken
+      isAuthLogin.value = true
+      return res
     }
+
+    isAuthLogin.value = false
     return res
   }
 

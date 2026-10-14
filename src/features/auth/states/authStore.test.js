@@ -24,6 +24,19 @@ describe('authStore', () => {
     expect(s.token).toBeNull()
   })
 
+  it('does not mark login successful when the API omits its token', async () => {
+    api.login.mockResolvedValue({ success: true, data: {} })
+    const s = useAuthStore()
+
+    const response = await s.loginUser({})
+
+    expect(response.success).toBe(false)
+    expect(response.message).toBe('Respons login tidak menyertakan token akses.')
+    expect(s.isAuthLogin).toBe(false)
+    expect(s.token).toBeNull()
+    expect(localStorage.getItem('accessToken')).toBeNull()
+  })
+
   it('registers', async () => {
     api.register.mockResolvedValue({ success: true })
     const s = useAuthStore()
