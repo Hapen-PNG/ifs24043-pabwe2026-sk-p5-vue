@@ -38,7 +38,7 @@ onMounted(() => load(tabs[0]))
     <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <li v-for="a in shown" :key="a.id">
         <article class="relative h-full overflow-hidden rounded-2xl bg-white shadow transition hover:-translate-y-0.5 hover:shadow-lg focus-within:ring-2 focus-within:ring-brand">
-          <img v-if="a.cover" loading="lazy" decoding="async" :src="a.cover" :alt="`Sampul ${a.title}`" class="h-40 w-full object-cover" />
+          <img v-if="a.cover" loading="lazy" decoding="async" width="320" height="160" :src="a.cover" :alt="`Sampul ${a.title}`" class="h-40 w-full object-cover" />
           <div class="space-y-2 p-4">
             <h2 class="font-bold"><RouterLink :to="`/aucations/${a.id}`" class="text-brand after:absolute after:inset-0 hover:underline">{{ a.title }}</RouterLink></h2>
             <p class="font-semibold text-accent">{{ formatRupiah(a.start_bid) }}</p>

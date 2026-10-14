@@ -48,7 +48,7 @@ async function remove() {
 
 <template>
   <article v-if="store.aucation" class="space-y-4 rounded-xl bg-white p-6 shadow">
-    <img v-if="store.aucation.cover" :src="store.aucation.cover" :alt="`Sampul ${store.aucation.title}`" class="max-h-80 w-full rounded-xl object-cover" />
+    <img v-if="store.aucation.cover" width="1200" height="800" :src="store.aucation.cover" :alt="`Sampul ${store.aucation.title}`" class="max-h-80 w-full rounded-xl object-cover" />
     <h1 class="text-2xl font-extrabold text-brand">{{ store.aucation.title }}</h1>
     <div class="flex items-center gap-3 text-sm">
       <UserAvatar :name="store.aucation.author.name" :photo="store.aucation.author.photo" />

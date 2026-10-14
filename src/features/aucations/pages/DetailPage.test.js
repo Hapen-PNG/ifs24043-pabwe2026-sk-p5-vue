@@ -101,7 +101,9 @@ describe('DetailPage', () => {
   it('shows the cover when present', async () => {
     api.getAucation.mockResolvedValue(detail({ cover: 'http://x/c.png' }))
     await mount()
-    expect(screen.getByRole('img', { name: 'Sampul Lukisan' })).toBeInTheDocument()
+    const cover = screen.getByRole('img', { name: 'Sampul Lukisan' })
+    expect(cover).toHaveAttribute('width', '1200')
+    expect(cover).toHaveAttribute('height', '800')
   })
 
   it('places a bid: error keeps the modal, success closes it and reloads', async () => {
