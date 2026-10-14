@@ -1,5 +1,5 @@
 import { createMemoryHistory } from 'vue-router'
-import { createAppRouter } from './router.js'
+import { createAppRouter, routes } from './router.js'
 
 async function go(path) {
   const router = createAppRouter(createMemoryHistory())
@@ -8,6 +8,19 @@ async function go(path) {
 }
 
 describe('route guard', () => {
+  it('lazy-loads all route components except the login page', async () => {
+    const lazyComponents = routes.flatMap((route) => [
+      route.component,
+      ...(route.children || []).map((child) => child.component),
+    ]).filter((component) => typeof component === 'function')
+
+    expect(routes[0].children[0].component).not.toBeInstanceOf(Function)
+    for (const loadComponent of lazyComponents) {
+      const loadedModule = await loadComponent()
+      expect(loadedModule.default).toBeDefined()
+    }
+  })
+
   it('redirects guests away from protected routes', async () => {
     expect(await go('/users')).toBe('/auth/login')
   })
