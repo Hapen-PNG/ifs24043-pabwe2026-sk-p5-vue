@@ -17,7 +17,9 @@ describe('route guard', () => {
   })
   it('allows logged-in users on protected routes and 404', async () => {
     localStorage.setItem('accessToken', 't')
+    expect(await go('/')).toBe('/')
     expect(await go('/profile')).toBe('/profile')
+    expect(await go('/users')).toBe('/users')
     expect(await go('/nope')).toBe('/nope')
   })
   it('allows guests on auth pages', async () => {

@@ -16,6 +16,14 @@ describe('authStore', () => {
     expect(localStorage.getItem('accessToken')).toBe('t1')
   })
 
+  it('restores a persisted token when the auth store is initialized', () => {
+    localStorage.setItem('accessToken', 'persisted-token')
+
+    const s = useAuthStore()
+
+    expect(s.token).toBe('persisted-token')
+  })
+
   it('keeps state on failed login', async () => {
     api.login.mockResolvedValue({ success: false })
     const s = useAuthStore()
